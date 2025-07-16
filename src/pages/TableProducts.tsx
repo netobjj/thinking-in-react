@@ -2,11 +2,26 @@ import './TableProducts.css';
 import { Product, ProductsDatabase } from '../db/data';
 
 function SearchBar() {
-    //input
-    // checkbox Only show products in stock
-    return (<div>searchBar</div>);
+
+    return (
+        <form>
+            <div className="row mt-5">
+                <input type="text" placeholder='search' />
+            </div>
+            <div className="row mt-3">
+                <label>
+                    <input type="checkbox" />
+
+                    Only show products in stock!
+                </label>
+            </div>
+
+        </form>
+
+    );
 }
 
+/* 
 function ProductRow({ category, products }: { category: string, products: Product[] }) {
     const productsFiltered = products
         .filter(c => c.category === category)
@@ -15,23 +30,30 @@ function ProductRow({ category, products }: { category: string, products: Produc
                 <td>{p.stocked === false ? <span className='red'>{p.name}</span> : p.name}</td>
                 <td>{p.price}</td>
             </tr>
-        ))
+        ));
 
     return productsFiltered;
-}
+} */
 
 function ProductCategoryRow({ category, products }: { category: string, products: Product[] }) {
-
-
+    const productsFiltered = products
+        .filter(c => c.category === category)
+        .map(p => (
+            <tr>
+                <td>{p.stocked === false ? <span className='red'>{p.name}</span> : p.name}</td>
+                <td>{p.price}</td>
+            </tr>
+        ));
 
     return (
         <>
-            <tr className='font-bold justify-center'>
-                {category}
+            <tr>
+                <th className='font-bold justify-center' colSpan={2}>
+                    {category}
+                </th>
             </tr>
-            <ProductRow category={category} products={products}/>
+            {productsFiltered}
         </>
-
     );
 }
 
