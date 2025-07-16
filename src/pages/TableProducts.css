@@ -1,0 +1,7 @@
+.table-products {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    height: 600px;
+}
+
